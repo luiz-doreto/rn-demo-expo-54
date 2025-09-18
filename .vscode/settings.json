@@ -23,5 +23,7 @@
   "files.associations": {
     "*.tsx": "typescriptreact",
     "*.ts": "typescript"
-  }
+  },
+  "files.eol": "\n",
+  "git.autocrlf": false
 }

@@ -56,29 +56,31 @@ export default [
     },
     rules: {
       ...prettierConfig.rules,
-      
+
       // Prettier integration
       'prettier/prettier': 'error',
-      
+
       // Basic rules
       'no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' },
+      ],
       'no-console': 'warn',
       'prefer-const': 'error',
-      
+
       // React rules
       'react/react-in-jsx-scope': 'off', // Not needed in React 17+
       'react/prop-types': 'off', // Using TypeScript for prop validation
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
-      
+
       // React Native specific
       'react-native/no-unused-styles': 'error',
       'react-native/split-platform-components': 'error',
       'react-native/no-inline-styles': 'warn',
-      'react-native/no-color-literals': 'warn',
       'react-native/no-raw-text': 'off', // Can be restrictive for simple text
-      
+
       // TypeScript rules
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
