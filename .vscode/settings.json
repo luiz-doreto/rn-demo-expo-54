@@ -25,5 +25,6 @@
     "*.ts": "typescript"
   },
   "files.eol": "\n",
-  "git.autocrlf": false
+  "git.autocrlf": false,
+  "cSpell.words": ["Amiibo"]
 }

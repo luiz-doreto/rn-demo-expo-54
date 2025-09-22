@@ -1,29 +1,20 @@
 import useHomeViewModel from '@/viewModel/Home/useHomeViewModel';
-import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlashList } from '@shopify/flash-list';
 import { useCallback } from 'react';
-import { AmiiboData } from '../../models/amiibos.model';
-import { Image } from 'expo-image';
+import CategoryCard from '@/components/CategoryCard';
+import { Category } from '@/store/types';
 
 const Home = () => {
   const { data, isLoading, error } = useHomeViewModel();
 
   const renderItem = useCallback(
-    ({ item }: { item: AmiiboData }) => (
-      <View style={styles.itemContainer} key={item.name}>
-        <Image
-          key={item.image}
-          source={{ uri: item.image }}
-          style={styles.image}
-        />
-        <Text>{item.name}</Text>
-      </View>
-    ),
+    ({ item }: { item: Category }) => <CategoryCard item={item} />,
     []
   );
 
-  const keyExtractor = useCallback((item: AmiiboData) => item.name, []);
+  const keyExtractor = useCallback((item: Category) => item.name, []);
 
   if (isLoading) {
     return <ActivityIndicator />;
@@ -39,12 +30,15 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Amiibos</Text>
+      <Text style={styles.header}>Amiibo Categories</Text>
       <FlashList
         data={data}
         contentContainerStyle={styles.listContainer}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
+        masonry
+        numColumns={2}
       />
     </SafeAreaView>
   );
@@ -54,20 +48,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  header: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '600',
+    marginVertical: 20,
+  },
   listContainer: {
     padding: 12,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    padding: 10,
-    height: 80,
-    backgroundColor: '#ccc',
-    marginBottom: 12,
-    borderRadius: 8,
-  },
-  image: {
-    width: 60,
-    height: 60,
+    paddingBottom: 80,
   },
 });
 
