@@ -1,15 +1,24 @@
+import { memo, useMemo } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { CategoryCardProps } from './types';
-import { memo } from 'react';
+import { router } from 'expo-router';
 import { Image } from 'expo-image';
+import { CategoryCardProps } from './types';
 
 const CategoryCard = ({ item }: CategoryCardProps) => {
+  const imageUrl = useMemo(() => item.items[0].image, [item.items]);
+
+  const handleOnPress = () => {
+    router.push(`/(tabs)/(homeStack)/${item.name}`);
+  };
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={handleOnPress}>
       <Image
         key={item.name}
-        source={{ uri: 'https://picsum.photos/200' }}
+        source={{ uri: imageUrl }}
         style={styles.image}
+        contentFit="cover"
+        contentPosition={'top'}
       />
       <View style={styles.backgroundOverlay} />
       <View style={styles.footerContent}>
@@ -23,7 +32,7 @@ const CategoryCard = ({ item }: CategoryCardProps) => {
 const styles = StyleSheet.create({
   container: {
     height: 150,
-    backgroundColor: 'skyblue',
+    backgroundColor: '#989898',
     margin: 4,
     borderRadius: 8,
     justifyContent: 'flex-end',

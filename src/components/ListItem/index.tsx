@@ -4,13 +4,13 @@ import { ListItemProps } from './types';
 import { memo } from 'react';
 
 const ListItem = ({ item }: ListItemProps) => {
-  // console.log('rendering: ', item.name);
   return (
     <View style={styles.itemContainer} key={item.name}>
       <Image
         key={item.image}
         source={{ uri: item.image }}
         style={styles.image}
+        contentFit="contain"
       />
       <Text>{item.name}</Text>
     </View>
